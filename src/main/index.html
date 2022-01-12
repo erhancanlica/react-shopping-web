@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html class="no-js" lang="tr" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Description for meta_hr" />
+    <meta name="google" content="notranslate" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <link rel="icon" href="favicon.ico" />
+    <link rel="manifest" href="manifest.webapp" />
+    <link rel="stylesheet" href="content/css/loading.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+  </head>
+  <body>
+    <div id="root">
+      <div class="app-loading">
+        <div class="lds-pacman">
+          <div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-loading">
+        <div id="error" style="display: none">
+            <h1>HATA</h1>
+      </div>
+    </div>
+
+    <noscript>
+      <h1>You must enable JavaScript to view this page.</h1>
+    </noscript>
+
+    <script type="text/javascript">
+      window.onload = function () {
+        setTimeout(showError, 4000);
+      };
+      function showError() {
+        var errorElm = document.getElementById("error");
+        if (errorElm && errorElm.style) {
+          errorElm.style.display = "block";
+        }
+      }
+    </script>
+  </body>
+</html>
