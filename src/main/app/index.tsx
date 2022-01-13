@@ -23,7 +23,7 @@ loadIcons();
 
 const rootEl = document.getElementById("root");
 
-const render = (Component) =>
+const render = (Component) => {
     ReactDOM.render(
         // eslint-disable-next-line react/no-render-return-value
         <ErrorBoundary>
@@ -35,5 +35,6 @@ const render = (Component) =>
         </ErrorBoundary>,
         rootEl
     );
+};
 
 render(AppComponent);
