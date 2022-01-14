@@ -10,10 +10,11 @@ import {
     NotificationOutlined,
 } from "@ant-design/icons";
 
-export const Home = () => {
+export const Home = (props) => {
     return (
-        <Menu.Item key="1" icon={<UserOutlined />}>
+        <Menu.Item key={props.key}  icon={<UserOutlined />}>
             <Link to={"/"}>Home</Link>
+            {props.children}
         </Menu.Item>
     );
 };

@@ -7,13 +7,13 @@ import LoadingBar from "react-redux-loading-bar";
 import { render } from "react-dom";
 
 import { Home } from "./header-components";
+import Link from "react-router-dom";
+import { Layout, Menu } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 
-import { Layout, Menu, ConfigProvider, Breadcrumb } from "antd";
-import {
-    UserOutlined,
-    LaptopOutlined,
-    NotificationOutlined,
-} from "@ant-design/icons";
+import AdminMenu from "app/shared/layout/menus/admin";
+import LocaleMenu from "app/shared/layout/menus/locale";
+import AccountMenu from "app/shared/layout/menus/account";
 
 export interface IHeaderProps {
     isAuthenticated: boolean;
@@ -33,8 +33,6 @@ const Navbar = (props: IHeaderProps) => {
         setCollapsed(!collapsed);
     }, []);
 
-    const [menuOpen, setMenuOpen] = useState(false);
-
     const handleLocaleChange = (event) => {
         const langKey = event.target.value;
         Storage.session.set("locale", langKey);
@@ -51,36 +49,40 @@ const Navbar = (props: IHeaderProps) => {
             </div>
         ) : null;
 
-    const toggleMenu = () => setMenuOpen(!menuOpen);
-
     return (
         <Layout id="app-header">
             {renderDevRibbon()}
             <LoadingBar className="loading-bar" />
-            <Header className="jh-navbar">
-                <div className="logo" />
-                <ConfigProvider direction="rtl">
-                    <Menu
-                        theme="dark"
-                        mode="horizontal"
-                        defaultSelectedKeys={["1"]}
-                    >
-                        <Home />
 
-                        <Menu.Item key="2">nav 2</Menu.Item>
-                        <SubMenu
-                            key="sub1"
-                            icon={<UserOutlined />}
-                            title="User"
-                        >
-                            <Menu.Item key="3">Tom</Menu.Item>
-                            <Menu.Item key="4">Bill</Menu.Item>
-                            <Menu.Item key="5">Alex</Menu.Item>
-                        </SubMenu>
+            <Header>
+                <Menu
+                    style={{
+                        justifyContent: "flex-end",
+                    }}
+                    theme="dark"
+                    mode="horizontal"
+                    defaultSelectedKeys={["home"]}
+                >
+                    <Home key="home" />
 
-                        <Menu.Item key="3">nav 3</Menu.Item>
-                    </Menu>
-                </ConfigProvider>
+                    {!props.isAuthenticated && !props.isAdmin && (
+                        <AdminMenu
+                            key="adminMenu"
+                            showOpenAPI={props.isOpenAPIEnabled}
+                        />
+                    )}
+
+                    <LocaleMenu
+                        key="localeMenu"
+                        currentLocale={props.currentLocale}
+                        onClick={handleLocaleChange}
+                    />
+
+                    <AccountMenu
+                        key="accountMenu"
+                        isAuthenticated={props.isAuthenticated}
+                    />
+                </Menu>
             </Header>
         </Layout>
     );
